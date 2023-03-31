@@ -1,0 +1,27 @@
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - ./wordpress-context-jsonld:/var/www/html/wp-content/plugins/wordpress-context-jsonld
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_DATABASE: exampledb
+      MARIADB_USER: exampleuser
+      MARIADB_PASSWORD: examplepass
+      MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:

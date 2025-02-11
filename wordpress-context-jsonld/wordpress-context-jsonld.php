@@ -12,9 +12,6 @@
  * Update URI:        https://github.com/datafoodconsortium/wordpress-context-jsonld
  */
 
-// Disable Polylang home redirection.
-add_filter( 'pll_redirect_home', '__return_false' );
-
 /**
  * Add the Link to the context and the CORS headers.
  */
@@ -30,13 +27,6 @@ add_filter('wp_headers', function ($headers, $wp) {
 
 	return $headers;
 }, 10, 2);
-
-/**
- * Remove the shortlink Link header.
- */
-add_filter('get_shortlink', function ($shortlink, $id, $context, $allow_slugs) {
-	return $_SERVER["REQUEST_URI"] === '/'? "": $shortlink;
-}, 10, 4);
 
 // Remove 
 if ($_SERVER["REQUEST_URI"] === '/') {
